@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   const stats = [
     { label: "Active Tasks", value: "12", icon: Briefcase, color: "text-primary" },
-    { label: "Total Earnings", value: "$2,450", icon: DollarSign, color: "text-secondary" },
+    { label: "Total Earnings", value: "₹2,450", icon: DollarSign, color: "text-secondary" },
     { label: "Completion Rate", value: "94%", icon: TrendingUp, color: "text-accent" },
   ];
 
