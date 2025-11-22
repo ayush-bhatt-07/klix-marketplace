@@ -71,6 +71,16 @@ const TaskFeed = () => {
       deadline: "6 days",
       category: "Health & Fitness",
     },
+    {
+      id: 6,
+      title: "HackHatch Project Promotion",
+      description: "Promote HackHatch event and projects on your social media. Share highlights, team achievements, and innovation stories.",
+      brand: "E-Cell IIIT Delhi",
+      reward: "20% evaluation",
+      location: "IIIT DELHI",
+      deadline: "1 hour",
+      category: "Education",
+    },
   ]);
 
   const handleAcceptTask = (taskId: number, taskTitle: string) => {
@@ -85,6 +95,7 @@ const TaskFeed = () => {
     "Fashion": "bg-accent/10 text-accent border-accent/20",
     "Technology": "bg-primary/10 text-primary border-primary/20",
     "Health & Fitness": "bg-green-500/10 text-green-600 border-green-500/20",
+    "Education": "bg-purple-500/10 text-purple-600 border-purple-500/20",
   };
 
   return (
