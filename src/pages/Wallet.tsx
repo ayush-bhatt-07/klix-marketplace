@@ -91,7 +91,7 @@ const Wallet = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold mb-4">${totalBalance.toFixed(2)}</div>
+                <div className="text-4xl font-bold mb-4">₹{totalBalance.toFixed(2)}</div>
                 <Button variant="secondary" className="w-full">
                   <Download className="w-4 h-4 mr-2" />
                   Withdraw Funds
@@ -105,7 +105,7 @@ const Wallet = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold mb-4 text-accent">
-                  ${pendingBalance.toFixed(2)}
+                  ₹{pendingBalance.toFixed(2)}
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Earnings will be available once tasks are verified
@@ -170,7 +170,7 @@ const Wallet = () => {
                           transaction.type === "credit" ? "text-primary" : "text-secondary"
                         }`}
                       >
-                        {transaction.type === "credit" ? "+" : ""}${Math.abs(transaction.amount)}
+                        {transaction.type === "credit" ? "+" : ""}₹{Math.abs(transaction.amount)}
                       </p>
                     </div>
                   </div>
