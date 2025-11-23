@@ -1,0 +1,361 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Instagram Story Feature",
+      "description": "Create an engaging Instagram story featuring our new coffee blend. Include product shots and your genuine review.",
+      "brand": "Local Coffee Co.",
+      "reward": "₹75",
+      "location": "Downtown",
+      "deadline": "3 days",
+      "category": "Food & Beverage",
+    },
+    {
+      "id": 2,
+      "title": "TikTok Video Challenge",
+      "description": "Participate in our trending dance challenge and tag our boutique. Show off your style with our summer collection!",
+      "brand": "Urban Style Boutique",
+      "reward": "₹120",
+      "location": "City Center",
+      "deadline": "5 days",
+      "category": "Fashion",
+    },
+    {
+      "id": 3,
+      "title": "Product Unboxing Reel",
+      "description": "Create a 30-second unboxing video of our latest tech gadget. Focus on features and first impressions.",
+      "brand": "TechHub Store",
+      "reward": "₹200",
+      "location": "Tech District",
+      "deadline": "7 days",
+      "category": "Technology",
+    },
+    {
+      "id": 4,
+      "title": "Restaurant Review Post",
+      "description": "Visit our new location and share your dining experience. Include photos of signature dishes and ambiance.",
+      "brand": "Fusion Kitchen",
+      "reward": "₹90",
+      "location": "Waterfront",
+      "deadline": "4 days",
+      "category": "Food & Beverage",
+    },
+    {
+      "id": 5,
+      "title": "Fitness Class Promotion",
+      "description": "Attend a complimentary yoga class and post about your experience. Highlight the community atmosphere.",
+      "brand": "ZenFit Studio",
+      "reward": "₹65",
+      "location": "Riverside",
+      "deadline": "6 days",
+      "category": "Health & Fitness",
+    },
+    {
+      "id": 6,
+      "title": "HackHatch Project Promotion",
+      "description": "Promote HackHatch event and projects on your social media. Share highlights, team achievements, and innovation stories.",
+      "brand": "E-Cell IIIT Delhi",
+      "reward": "20% evaluation",
+      "location": "IIIT DELHI",
+      "deadline": "1 hour",
+      "category": "Education",
+    },
+    {
+      "id": 1,
+      "title": "Vaibhav Chaturvedi",
+      "description": "aaaaaaaaaaaaaa",
+      "brand": "Brand",
+      "reward": "230",
+      "location": "",
+      "deadline": "",
+      "category": ""
+    },
+    {
+      "id": 2,
+      "title": "Vaibhav Chaturvedi",
+      "description": "aaasssssssss",
+      "brand": "Brand",
+      "reward": "456",
+      "location": "",
+      "deadline": "",
+      "category": ""
+    },
+    {
+      "id": 3,
+      "title": "Vaibhav Chaturvedi",
+      "description": "asdfghj",
+      "brand": "Brand",
+      "reward": "456987",
+      "location": "",
+      "deadline": "",
+      "category": ""
+    },
+    {
+      "id": 4,
+      "title": "Vaibhav Chaturvedi",
+      "description": "kjhgfdsa",
+      "brand": "Brand",
+      "reward": "789",
+      "location": "",
+      "deadline": "",
+      "category": ""
+    },
+    {
+      "id": 5,
+      "title": "Vaibhav Chaturvedi",
+      "description": "aa",
+      "brand": "Brand",
+      "reward": "1234",
+      "location": "",
+      "deadline": "",
+      "category": ""
+    },
+    {
+      "id": 6,
+      "title": "Vaibhav Chaturvedi",
+      "description": "hack project",
+      "brand": "Brand",
+      "reward": "1234",
+      "location": "",
+      "deadline": "",
+      "category": ""
+    }
+  ],
+  "accepted": [
+    {
+      "taskId": 2,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T00:39:44.236Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 6,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T00:40:46.898Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 1,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T00:53:36.926Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 4,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T00:54:34.170Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 5,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T00:54:59.243Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 3,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T01:00:46.248Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 7,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T01:33:39.376Z",
+      "status": "accepted"
+    },
+    {
+      "taskId": 8,
+      "influencer": {
+        "id": 1,
+        "name": "Demo Influencer"
+      },
+      "acceptedAt": "2025-11-23T01:46:48.325Z",
+      "status": "accepted"
+    }
+  ],
+  "wallets": [
+    {
+      "influencerId": 1,
+      "influencerName": "Demo Influencer",
+      "balance": 12896,
+      "transactions": [
+        {
+          "type": "credit",
+          "amount": 120,
+          "source": "task:2",
+          "at": "2025-11-23T00:39:44.236Z"
+        },
+        {
+          "type": "credit",
+          "amount": 75,
+          "source": "task:1",
+          "at": "2025-11-23T00:53:36.926Z"
+        },
+        {
+          "type": "credit",
+          "amount": 90,
+          "source": "task:4",
+          "at": "2025-11-23T00:54:34.170Z"
+        },
+        {
+          "type": "credit",
+          "amount": 65,
+          "source": "task:5",
+          "at": "2025-11-23T00:54:59.243Z"
+        },
+        {
+          "type": "credit",
+          "amount": 200,
+          "source": "task:3",
+          "at": "2025-11-23T01:00:46.249Z"
+        },
+        {
+          "type": "credit",
+          "amount": 3,
+          "source": "task:7",
+          "at": "2025-11-23T01:33:39.377Z"
+        },
+        {
+          "type": "credit",
+          "amount": 12343,
+          "source": "task:8",
+          "at": "2025-11-23T01:46:48.326Z"
+        }
+      ]
+    }
+  ],
+  "campaigns": [
+    {
+      "id": 1,
+      "name": "Vaibhav Chaturvedi",
+      "description": "aaa",
+      "budget": "234",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T00:53:59.295Z",
+      "status": "live"
+    },
+    {
+      "id": 2,
+      "name": "Vaibhav Chaturvedi",
+      "description": "aaa",
+      "budget": "12",
+      "category": "",
+      "location": "Cancun",
+      "duration": "",
+      "createdAt": "2025-11-23T00:54:21.409Z",
+      "status": "live"
+    },
+    {
+      "id": 3,
+      "name": "Vaibhav Chaturvedi",
+      "description": "aaaaaaaaaaaaaa",
+      "budget": "230",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:01:16.004Z",
+      "status": "live"
+    },
+    {
+      "id": 4,
+      "name": "Vaibhav Chaturvedi",
+      "description": "aaasssssssss",
+      "budget": "456",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:07:50.163Z",
+      "status": "live"
+    },
+    {
+      "id": 5,
+      "name": "Vaibhav Chaturvedi",
+      "description": "asdfghj",
+      "budget": "456987",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:11:22.598Z",
+      "status": "live"
+    },
+    {
+      "id": 6,
+      "name": "Vaibhav Chaturvedi",
+      "description": "kjhgfdsa",
+      "budget": "789",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:16:24.436Z",
+      "status": "live"
+    },
+    {
+      "id": 7,
+      "name": "Vaibhav Chaturvedi",
+      "description": "aa",
+      "budget": "1234",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:21:26.739Z",
+      "status": "live"
+    },
+    {
+      "id": 8,
+      "name": "Vaibhav Chaturvedi",
+      "description": "hack project",
+      "budget": "1234",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:24:04.256Z",
+      "status": "live"
+    },
+    {
+      "id": 9,
+      "name": "Vaibhav Chaturvedi",
+      "description": "l",
+      "budget": "3",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:33:34.544Z",
+      "status": "live"
+    },
+    {
+      "id": 10,
+      "name": "Vaibhav Chaturvedi",
+      "description": "hack project",
+      "budget": "12343",
+      "category": "",
+      "location": "",
+      "duration": "",
+      "createdAt": "2025-11-23T01:46:41.203Z",
+      "status": "live"
+    }
+  ]
+}

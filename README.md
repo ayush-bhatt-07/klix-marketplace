@@ -1,22 +1,20 @@
-# Welcome to your Lovable project
+# Welcome to Klix project
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/83cceb45-9a6b-4ba0-a6f0-1212dea26f68
+**URL**: (project URL removed)
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+**Use the web editor**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/83cceb45-9a6b-4ba0-a6f0-1212dea26f68) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+If you have a web-based editor or project dashboard for this repository, use that to manage prompts and project settings. Otherwise use your preferred IDE.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in any connected project management tools.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -35,6 +33,19 @@ npm i
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
+
+## Running backend (local)
+
+This repo includes a minimal demo backend in the `backend/` folder. To run it locally:
+
+```powershell
+cd backend
+npm install
+npm run dev
+```
+
+The backend listens on port `4000` by default. The frontend expects the API at `http://localhost:4000` unless you set `VITE_API_BASE` in your environment.
+
 
 **Edit a file directly in GitHub**
 
@@ -62,12 +73,12 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/83cceb45-9a6b-4ba0-a6f0-1212dea26f68) and click on Share -> Publish.
+Deploy and publish using your chosen platform (Vercel, Netlify, or your own host).
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to my project?
 
 Yes, you can!
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Read more here: [Setting up a custom domain](https://example.com/docs/custom-domain)

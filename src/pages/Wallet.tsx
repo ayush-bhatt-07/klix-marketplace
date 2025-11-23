@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import * as api from "@/lib/api";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,56 +17,37 @@ interface Transaction {
 }
 
 const Wallet = () => {
-  const [transactions] = useState<Transaction[]>([
-    {
-      id: 1,
-      type: "credit",
-      description: "Instagram Story Feature - Local Coffee Co.",
-      amount: 75,
-      date: "2025-01-15",
-      status: "completed",
-    },
-    {
-      id: 2,
-      type: "credit",
-      description: "TikTok Video Challenge - Urban Style Boutique",
-      amount: 120,
-      date: "2025-01-14",
-      status: "completed",
-    },
-    {
-      id: 3,
-      type: "debit",
-      description: "Withdrawal to Bank Account",
-      amount: -150,
-      date: "2025-01-13",
-      status: "completed",
-    },
-    {
-      id: 4,
-      type: "credit",
-      description: "Product Unboxing Reel - TechHub Store",
-      amount: 200,
-      date: "2025-01-12",
-      status: "completed",
-    },
-    {
-      id: 5,
-      type: "credit",
-      description: "Restaurant Review Post - Fusion Kitchen",
-      amount: 90,
-      date: "2025-01-10",
-      status: "pending",
-    },
-  ]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [balance, setBalance] = useState<number | null>(null);
+  const [pendingBalance, setPendingBalance] = useState<number>(0);
 
-  const totalBalance = transactions
-    .filter((t) => t.status === "completed")
-    .reduce((sum, t) => sum + (t.type === "credit" ? t.amount : t.amount), 0);
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const w = await api.fetchWallet(1);
+        if (!mounted) return;
+        // map backend wallet.transactions to Transaction[] shape
+        const txs = (w.transactions || []).map((t, idx) => ({
+          id: idx + 1,
+          type: t.type,
+          description: t.source || (t.type === "credit" ? "Credit" : "Debit"),
+          amount: t.amount,
+          date: t.at || new Date().toISOString(),
+          status: "completed",
+        }));
+        setTransactions(txs);
+        setBalance(Number(w.balance || 0));
+        // set a random pending balance (stable for this view)
+        setPendingBalance(Math.floor(Math.random() * 500));
+      } catch (e) {
+        console.error("Failed to load wallet", e);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
 
-  const pendingBalance = transactions
-    .filter((t) => t.status === "pending")
-    .reduce((sum, t) => sum + (t.type === "credit" ? t.amount : 0), 0);
+  const totalBalance = balance ?? 0;
 
   return (
     <div className="min-h-screen flex flex-col">

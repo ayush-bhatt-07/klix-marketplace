@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as api from "@/lib/api";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const CampaignCreate = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -32,21 +35,23 @@ const CampaignCreate = () => {
       });
       return;
     }
-
-    toast({
-      title: "Campaign Created! 🚀",
-      description: `"${formData.name}" has been successfully created and is now live.`,
-    });
-
-    // Reset form
-    setFormData({
-      name: "",
-      description: "",
-      budget: "",
-      category: "",
-      location: "",
-      duration: "",
-    });
+    // create campaign via API
+    (async () => {
+      try {
+        const created = await api.createCampaign(formData);
+        const name = created?.name || (created?.campaign?.name) || formData.name;
+        console.log("createCampaign response:", created);
+        toast({ title: "Campaign Created! 🚀", description: `"${name}" is live.` });
+        // Reset form
+        setFormData({ name: "", description: "", budget: "", category: "", location: "", duration: "" });
+        // Redirect to dashboard
+        navigate("/dashboard");
+      } catch (err: any) {
+        console.error("create campaign error:", err);
+        const message = err?.message || String(err);
+        toast({ title: "Failed to create campaign", description: message, variant: "destructive" });
+      }
+    })();
   };
 
   const handleChange = (field: string, value: string) => {
