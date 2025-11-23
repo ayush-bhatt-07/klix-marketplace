@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import * as api from "@/lib/api";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -7,12 +9,9 @@ import { PlusCircle, Briefcase, Wallet, TrendingUp, DollarSign, Target } from "l
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [activeTasks, setActiveTasks] = useState<number | null>(null);
 
-  const stats = [
-    { label: "Active Tasks", value: "12", icon: Briefcase, color: "text-primary" },
-    { label: "Total Earnings", value: "₹2,450", icon: DollarSign, color: "text-secondary" },
-    { label: "Completion Rate", value: "94%", icon: TrendingUp, color: "text-accent" },
-  ];
+  // dynamic stats will be computed after data loads
 
   const quickActions = [
     {
@@ -36,6 +35,31 @@ const Dashboard = () => {
       action: () => navigate("/wallet"),
       gradient: "bg-accent",
     },
+  ];
+
+  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [wallet, setWallet] = useState<any | null>(null);
+  
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const [ts, cs, w] = await Promise.all([api.fetchTasks(), api.fetchCampaigns(), api.fetchWallet(1)]);
+        if (!mounted) return;
+        setActiveTasks(Array.isArray(ts) ? ts.length : 0);
+        setCampaigns(cs || []);
+        setWallet(w || null);
+      } catch (e) {
+        console.error("Dashboard load error", e);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
+
+  const stats = [
+    { label: "Active Tasks", value: activeTasks !== null ? String(activeTasks) : "Loading...", icon: Briefcase, color: "text-primary" },
+    { label: "Total Earnings", value: wallet ? `₹${wallet.balance}` : "Loading...", icon: DollarSign, color: "text-secondary" },
+    { label: "Completion Rate", value: campaigns ? `${Math.min(100, Math.round((campaigns.length || 0) * 10))}%` : "--%", icon: TrendingUp, color: "text-accent" },
   ];
 
   return (
@@ -65,12 +89,50 @@ const Dashboard = () => {
                     <Icon className={`w-5 h-5 ${stat.color}`} />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-3xl font-bold">{stat.value}</div>
+                      <div className="text-3xl font-bold">{stat.value}</div>
                   </CardContent>
                 </Card>
               );
             })}
           </div>
+
+            {/* Wallet + Campaigns */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="shadow-card border-border hover:shadow-glow transition-smooth">
+                <CardHeader>
+                  <CardTitle>Wallet</CardTitle>
+                  <Wallet className="w-5 h-5 text-primary" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{wallet ? `₹${wallet.balance}` : "Loading..."}</div>
+                  <p className="text-sm text-muted-foreground mt-2">Available balance</p>
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-card border-border md:col-span-2">
+                <CardHeader>
+                  <CardTitle>Recent Campaigns</CardTitle>
+                  <CardDescription>Campaigns you created</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {campaigns.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">No campaigns yet.</p>
+                  ) : (
+                    <ul className="space-y-3">
+                      {campaigns.map((c) => (
+                        <li key={c.id} className="flex items-center justify-between">
+                          <div>
+                            <div className="font-medium">{c.name}</div>
+                            <div className="text-xs text-muted-foreground">{c.createdAt}</div>
+                          </div>
+                          <div className="text-sm text-muted-foreground">{c.status}</div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
 
           {/* Quick Actions */}
           <div className="space-y-4">

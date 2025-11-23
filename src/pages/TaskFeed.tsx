@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,74 +21,45 @@ interface Task {
 
 const TaskFeed = () => {
   const { toast } = useToast();
-  const [tasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: "Instagram Story Feature",
-      description: "Create an engaging Instagram story featuring our new coffee blend. Include product shots and your genuine review.",
-      brand: "Local Coffee Co.",
-      reward: "₹75",
-      location: "Downtown",
-      deadline: "3 days",
-      category: "Food & Beverage",
-    },
-    {
-      id: 2,
-      title: "TikTok Video Challenge",
-      description: "Participate in our trending dance challenge and tag our boutique. Show off your style with our summer collection!",
-      brand: "Urban Style Boutique",
-      reward: "₹120",
-      location: "City Center",
-      deadline: "5 days",
-      category: "Fashion",
-    },
-    {
-      id: 3,
-      title: "Product Unboxing Reel",
-      description: "Create a 30-second unboxing video of our latest tech gadget. Focus on features and first impressions.",
-      brand: "TechHub Store",
-      reward: "₹200",
-      location: "Tech District",
-      deadline: "7 days",
-      category: "Technology",
-    },
-    {
-      id: 4,
-      title: "Restaurant Review Post",
-      description: "Visit our new location and share your dining experience. Include photos of signature dishes and ambiance.",
-      brand: "Fusion Kitchen",
-      reward: "₹90",
-      location: "Waterfront",
-      deadline: "4 days",
-      category: "Food & Beverage",
-    },
-    {
-      id: 5,
-      title: "Fitness Class Promotion",
-      description: "Attend a complimentary yoga class and post about your experience. Highlight the community atmosphere.",
-      brand: "ZenFit Studio",
-      reward: "₹65",
-      location: "Riverside",
-      deadline: "6 days",
-      category: "Health & Fitness",
-    },
-    {
-      id: 6,
-      title: "HackHatch Project Promotion",
-      description: "Promote HackHatch event and projects on your social media. Share highlights, team achievements, and innovation stories.",
-      brand: "E-Cell IIIT Delhi",
-      reward: "20% evaluation",
-      location: "IIIT DELHI",
-      deadline: "1 hour",
-      category: "Education",
-    },
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const handleAcceptTask = (taskId: number, taskTitle: string) => {
-    toast({
-      title: "Task Accepted! 🎉",
-      description: `You've successfully accepted "${taskTitle}". Check your dashboard for details.`,
+  useEffect(() => {
+    let mounted = true;
+    import("@/lib/api").then(async (mod) => {
+      try {
+        const data = await mod.fetchTasks();
+        if (mounted) setTasks(data);
+      } catch (e) {
+        console.error(e);
+        toast({ title: "Failed to load tasks", description: String(e) });
+      } finally {
+        if (mounted) setLoading(false);
+      }
     });
+    return () => {
+      mounted = false;
+    };
+  }, [toast]);
+
+  const handleAcceptTask = async (taskId: number, taskTitle: string) => {
+    try {
+      const api = await import("@/lib/api");
+      const result = await api.acceptTask(taskId, { id: 1, name: "Demo Influencer" });
+      console.log("acceptTask result:", result);
+      toast({
+        title: "Task Accepted! 🎉",
+        description: `You've successfully accepted "${taskTitle}". Credited: ₹${result.credited}.`,
+      });
+      // Optionally update UI
+      setTasks((prev) => prev.filter((t) => t.id !== taskId));
+      // Redirect to dashboard so user can see wallet/campaigns
+      navigate("/dashboard");
+    } catch (e) {
+      console.error(e);
+      toast({ title: "Accept failed", description: e?.message || String(e) });
+    }
   };
 
   const categoryColors: Record<string, string> = {
@@ -114,7 +86,10 @@ const TaskFeed = () => {
 
           {/* Task Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {tasks.map((task) => (
+            {loading ? (
+              <div className="col-span-full">Loading tasks...</div>
+            ) : (
+              tasks.map((task) => (
               <Card 
                 key={task.id}
                 className="shadow-card border-border hover:shadow-glow transition-smooth"
@@ -154,7 +129,8 @@ const TaskFeed = () => {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </main>
